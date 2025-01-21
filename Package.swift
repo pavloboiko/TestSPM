@@ -3,6 +3,10 @@
 
 import PackageDescription
 
+let targets = [
+    "libbackend","libbasis_transcoder","libcamutils","libcivetweb","libdracodec","libfilabridge","libfilaflat","libfilamat","libfilament-iblprefilter","libfilament","libfilameshio","libgeometry","libgltfio_core","libibl-lite","libibl","libimage","libktxreader","libmeshoptimizer","libmikktspace","libshaders","libsmol-v","libstb","libuberarchive","libuberzlib","libutils","libviewer","libvkshaders","libzstd"
+]
+
 let package = Package(
     name: "TestSPM",
     products: [
@@ -25,7 +29,9 @@ let package = Package(
         ),
         .target(
             name: "Bindings",
+            dependencies: targets.map({ .byName(name: $0) }),
             path: "Bindings"
         )
-    ])
+    ] + targets.map({ .binaryTarget(name: $0, path: "lib/\($0).xcframework") })),
+    cxxLanguageStandard: .cxx17
 )
