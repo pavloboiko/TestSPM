@@ -13,6 +13,5 @@ public class HelpersManager {
     
     public func pringLog() {
         print("Pavlo test Helpers Manager")
-        BindingManager.shared.pringLog()
     }
 }
